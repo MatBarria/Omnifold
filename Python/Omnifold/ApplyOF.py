@@ -180,7 +180,7 @@ mc_args = {'input_dim': len(obs_multifold), 'dense_sizes': model_layer_sizes,
            'modelcheck_opts': {'save_best_only': True, 'verbose': 1}}
 
 # general training parameters
-fitargs = {'batch_size': 1000, 'epochs': 2, 'verbose': 1}
+fitargs = {'batch_size': 500, 'epochs': 2, 'verbose': 1}
 #fitargs = {'batch_size': 500, 'epochs': 100, 'verbose': 1} # use this for a full training
 
 # reweight the sim and data to have the same total weight to begin with

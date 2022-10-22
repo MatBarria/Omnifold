@@ -1,5 +1,5 @@
 // It can be compile with
-// g++ -Wall -fPIC  `root-config --cflags` SplitSimhalf.cpp -o ./bin/SplitSimhalf `root-config --glibs`
+// g++ -Wall -fpic  `root-config --cflags` SplitSimhalf.cpp -o ./bin/SplitSimhalf `root-config --glibs`
 // For the target name use (D,C,Fe,Pb)
 
 #include <iostream>
@@ -52,7 +52,9 @@ int main(int argc, char* argv[]) {
   TFile *FHfile = new TFile(Form("/home/matias/proyecto/Omnifold/Data/OF_SIM_%s_1.root", targetArr), "RECREATE");
   gROOT->cd();
   TNtuple *FHtuple = new TNtuple("ntuple_sim", "", VarList);
-  for(int i = 0; i < simulTuple->GetEntries()/2; i++) { 
+  //int splitEvnt = simulTuple->GetEntries()/2 
+  int splitEvnt = 5000 ;
+  for(int i = 0; i < splitEvnt; i++) { 
     simulTuple->GetEntry(i);
     FHtuple->Fill(vars);
   }
@@ -67,7 +69,7 @@ int main(int argc, char* argv[]) {
   TFile *SHfile = new TFile(Form("/home/matias/proyecto/Omnifold/Data/OF_SIM_%s_2.root", targetArr), "RECREATE");
   gROOT->cd();
   TNtuple *SHtuple = new TNtuple("ntuple_sim", "", VarList);
-  for(int j = simulTuple->GetEntries()/2; j < simulTuple->GetEntries(); j++) { 
+  for(int j = splitEvnt; j < simulTuple->GetEntries(); j++) { 
     simulTuple->GetEntry(j);
     SHtuple->Fill(vars); 
   }
