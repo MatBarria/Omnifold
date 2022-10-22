@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
   int n = target.length();
   char targetArr[n + 1];
   strcpy(targetArr, target.c_str());
-  int dummyval = -10;
+  int dummyval = -999;
 
   std::cout << "Start" << std::endl;
 
@@ -96,9 +96,9 @@ int main(int argc, char* argv[]) {
       //int tmpCounter = 0;
       //float tmpEvnt;
       //float tmpZh[5], tmpPt[5], tmpPhi[5] ;
-
+      int isPion;
       for(int i = 0; i < simulTuple->GetEntries(); i++) { // Loops in every generated particle
-        int isPion = 0; // If is diferent than 0 there is a generated or reconstructed pion
+        isPion = 0; // If is diferent than 0 there is a generated or reconstructed pion
 	simulTuple->GetEntry(i);
         // Check if the generated paricle is a pion+
 	if(pidGen == 211) {
