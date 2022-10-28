@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     return 0;
   }
 
-  TStopwatch t;
+  TStopwatch	 t;
 
   // For the Target name use (D,C,Fe,Pb)
   std::string target = argv[1];
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
   float *vars = new Float_t[24];
   TNtuple* outputTuple = new TNtuple("ntuple_sim", "", VarList);
   for(int folder = 1; folder < 10; folder++) { // Loops in every directory
-    for(int sim = 1; sim < 500; sim++) { // Loops in every simulation of the directory
+    for(int sim = 153; sim < 158; sim++) { // Loops in every simulation of the directory
       // Set the name of the file where is the data depends on the target and the folder
       if(targetArr[0] == 'D' ){
         if(folder < 4) {
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
         }
       }
       //std::cout << "Checking directory " << folder << "  " << sim << std::endl;
-      //inputName = Form("/home/matias/proyecto/Piones/Data/Simul/pruned%s_%i.root",targetArr ,sim);
+      inputName = Form("/home/matias/proyecto/Piones/Data/Simul/pruned%s_%i.root",targetArr ,sim);
       // Open the file and check if it's exist
       TFile* fSource = new TFile(inputName,"READ");
       if (fSource->IsZombie()) {
@@ -227,7 +227,7 @@ int main(int argc, char* argv[]) {
         
 
 	// If there is one Rec pion set sum variables = val non null pion
-	if(vars[0] == 1) {
+	if(vars[12] == 1) {
 	  if(vars[15] != dummyval) {
 	    vars[21] = vars[15];
 	    vars[22] = vars[16];
@@ -241,7 +241,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	
-        if(vars[2] == 2) {
+        if(vars[0] == 2) {
 	  TVector2* vec = new TVector2(0,0);
 	  for(int k = 0; k < 2; k++) {
 	    // Calculate de tranvers momentum vector
@@ -255,7 +255,7 @@ int main(int argc, char* argv[]) {
 	  vars[11] = vec->Phi()*TMath::RadToDeg()-180;
 	  delete vec;
 	}
-	if(vars[2] == 2) {
+	if(vars[12] == 2) {
 	  TVector2* vec = new TVector2(0,0);
 	  for(int k = 0; k < 2; k++) {
 	    // Calculate de tranvers momentum vector
@@ -286,8 +286,8 @@ int main(int argc, char* argv[]) {
   } // End folder loop
 
   // Save the Ntuple
-  TFile *fileOutput= new TFile(Form("/work/mbarrial/Omnifold/Data/OF_SIM_TWO_%s.root", targetArr), "RECREATE");
-  //TFile *fileOutput= new TFile("/home/matias/proyecto/Omnifold/Data/OF_SIM_TWO_C.root", "RECREATE");
+  //TFile *fileOutput= new TFile(Form("/work/mbarrial/Omnifold/Data/OF_SIM_TWO_%s.root", targetArr), "RECREATE");
+  TFile *fileOutput= new TFile("/home/matias/proyecto/Omnifold/Data/OF_SIM_TWO_C.root", "RECREATE");
   fileOutput->cd();
   outputTuple->Write();
   gROOT->cd();
